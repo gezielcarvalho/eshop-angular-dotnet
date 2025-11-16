@@ -1,0 +1,63 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker: Debug Backend (.NET)",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickRemoteProcess}",
+      "pipeTransport": {
+        "pipeProgram": "docker",
+        "pipeArgs": ["exec", "-i", "eshop-backend-debug"],
+        "debuggerPath": "/vsdbg/vsdbg",
+        "pipeCwd": "${workspaceFolder}",
+        "quoteArgs": false
+      },
+      "sourceFileMap": {
+        "/src": "${workspaceFolder}/backend"
+      },
+      "justMyCode": false,
+      "logging": {
+        "moduleLoad": false
+      }
+    },
+    {
+      "name": "Docker: Launch Frontend (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/frontend",
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${workspaceFolder}/frontend/*",
+        "/./*": "${workspaceFolder}/frontend/*",
+        "/src/*": "${workspaceFolder}/frontend/src/*",
+        "/*": "*",
+        "/./~/*": "${workspaceFolder}/frontend/node_modules/*"
+      }
+    },
+    {
+      "name": "Docker: Launch Frontend (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/frontend",
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${workspaceFolder}/frontend/*",
+        "/./*": "${workspaceFolder}/frontend/*",
+        "/src/*": "${workspaceFolder}/frontend/src/*",
+        "/*": "*",
+        "/./~/*": "${workspaceFolder}/frontend/node_modules/*"
+      }
+    },
+    {
+      "name": "Docker: Debug Backend + Frontend",
+      "configurations": [
+        "Docker: Debug Backend (.NET)",
+        "Docker: Launch Frontend (Chrome)"
+      ],
+      "preLaunchTask": "docker-debug-up",
+      "stopAll": true
+    }
+  ],
+  "compounds": []
+}

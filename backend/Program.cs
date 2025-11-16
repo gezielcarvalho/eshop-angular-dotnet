@@ -22,7 +22,8 @@ namespace backend
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // Disable HTTPS redirection in Docker development
+            // app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
