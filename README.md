@@ -120,10 +120,11 @@ Both frontend and backend support hot reload in Docker:
 
 ### Backend Development
 
-- Backend runs on port 5175 (HTTP) and 7277 (HTTPS)
+- Backend runs on port 5175 (HTTP only)
 - Swagger UI available at `/swagger`
 - Debugging uses remote attach with vsdbg
 - Volume mounted for live code updates
+- HTTPS disabled in Docker for simplicity
 
 ### Frontend Development
 
